@@ -101,7 +101,7 @@
 												<span>Address: <strong>Sankhamul, <br>New Baneshwor, Kathmandu, Nepal</strong></span>
 											</li>
 											<li>
-												<span>Call us: <strong class="font-size18">(+977) 985-1018797</strong></span>
+												<span>Call us: <strong class="font-size1">(+977) 985-1018797<br><span style="color: #0469b7;">Email us: <strong>gpschartered@gmail.com</strong></span></strong></span>
 											</li>
 										</ul>
 										<!-- contact info close -->
@@ -116,17 +116,6 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="header-mainnav">
-
-									<!-- <div class="search-cart-box fright">
-										<div class="toggle_search fright"><i class="fa fa-search" aria-hidden="true"></i></div>
-										<div class="h-search-form-field">
-											<form role="search" method="get" id="search-form" class="search-form" action="#">
-												<input type="search" class="search-field" placeholder="Enter keyword..." value="" name="s">
-												<button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
-											</form>
-										</div>
-									</div> -->
-
 									<div id="site-navigation" class="main-navigation fleft">
 										<ul id="primary-menu" class="menu" style="padding-right: 20px;">
 											<li><a href="<?php echo get_site_url(); ?>">Home</a></li>
@@ -189,7 +178,8 @@
 												'menu_class'     => 'menu',
 											)
 										);
-										?> </div>
+										?>
+									</div>
 									<!-- #site-navigation -->
 								</div>
 							</div>
@@ -220,7 +210,6 @@
 							<p class="site-description"><?php echo $gpscc_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 														?></p>
 						<?php endif; ?>
-						<!-- <a href="#"><img src="images/logo-white.svg" alt="Consultax"></a> -->
 					</div>
 					<div id="mmenu_toggle">
 						<button></button>
@@ -229,49 +218,57 @@
 				<div class="mmenu_wrapper">
 					<div class="mobile_nav collapse">
 						<ul id="menu-main-menu" class="mobile_mainmenu">
-							<li class="menu-item-has-children"><a href="index.html">Home</a>
+							<li><a href="<?php echo get_site_url(); ?>">Home</a></li>
+							<li class="menu-item-has-children"><a href="#">Services</a>
 								<ul class="sub-menu">
-									<li><a href="index.html" aria-current="page">Home 1</a></li>
-									<li><a href="home-2.html">Home 2</a></li>
-								</ul>
-							</li>
-							<li class="menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1731"><a href="#">Pages</a>
-								<ul class="sub-menu">
-									<li class="menu-item-1738"><a href="about.html">About Us</a></li>
-									<li class="menu-item-1745"><a href="team.html">Our Team</a></li>
-									<li class="menu-item-1742"><a href="how-it-work.html">How It Work</a></li>
-									<li class="menu-item-1746"><a href="testimonials.html">Testimonials</a></li>
-									<li class="menu-item-1757"><a href="services.html">Services Box</a></li>
-									<li class="menu-item-1744"><a href="services-icon.html">Icon Box</a></li>
-									<li class="menu-item-1740"><a href="career.html">Career</a></li>
-								</ul>
-							</li>
-							<li class="menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1789"><a href="services.html">Services</a>
-								<ul class="sub-menu">
-									<li class="menu-item-1791"><a href="service-detail.html">Financial Consulting</a></li>
-									<li class="menu-item-1758"><a href="service-detail.html">International Business</a></li>
-									<li class="menu-item-1790"><a href="service-detail.html">Audit &amp; Assurance</a></li>
-									<li class="menu-item-1760"><a href="service-detail.html">Taxes and Efficiency</a></li>
-									<li class="menu-item-1761"><a href="service-detail.html">Bonds &amp; Commodities</a></li>
-								</ul>
-							</li>
-							<li class="menu-item-has-children"><a href="projects.html">Cases Study</a>
-								<ul class="sub-menu">
-									<li><a href="projects.html">Cases Study 2 Columns</a></li>
-									<li><a href="projects-2.html">Cases Study 3 Columns</a></li>
+									<?php
+									$terms = get_terms(array('taxonomy' => 'servicetype', 'orderby' => 'id', 'order' => 'ASC',));
+									foreach ($terms as $key => $term) {
+										$args = array(
+											'post_type' => 'service',
+											'posts_per_page' => -1,
+											'orderby'    => 'ID',
+											'order'      => 'ASC',
+											'tax_query' => array(
+												array(
+													'taxonomy' => 'servicetype',
+													'field' => 'slug',
+													'terms' => $term->slug
 
-									<li><a href="project-detail.html">Cases Study Details</a></li>
-								</ul>
-							</li>
-							<li class="menu-item-has-children"><a href="blog.html">Blog</a>
-								<ul class="sub-menu">
-									<li><a href="blog.html">Blog List</a></li>
-									<li><a href="post.html">Blog Details</a></li>
-								</ul>
-							</li>
-							<li><a href="contact.html">Contact</a></li>
+												)
+											)
+										);
+										$the_query = new WP_Query($args);
+									?>
+										<li class="menu-item-has-children"><a href="#" aria-current="page"><?php echo $term->name ?></a>
+											<?php while ($the_query->have_posts()) {
+												$the_query->the_post();  ?>
+												<ul class="sub-menu" style="background: #f23225;">
+													<li>
+														<a href="<?php the_permalink(); ?>" aria-current="page"><?php echo get_the_title(); ?> <span style="float: right;">*<?php echo get_field('charge'); ?></span></a>
+													</li>
+												</ul>
+											<?php
+											} ?>
+										</li>
+									<?php
+									} ?>
 
+								</ul>
+							</li>
 						</ul>
+					</div>
+					<div class="mobile_nav collapse">
+						<?php
+						wp_nav_menu(
+							array(
+								'theme_location' => 'primary',
+								'menu' 			 => 'main_menu',
+								'container'      => '',
+								'menu_class'     => 'mobile_mainmenu',
+							)
+						);
+						?>
 					</div>
 				</div>
 			</div>

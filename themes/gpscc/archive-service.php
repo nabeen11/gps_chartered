@@ -22,27 +22,27 @@
         <div class="container">
             <div class="row">
                 <?php
-                while (have_posts()) {
-                    the_post();
+                $terms = get_terms(array('taxonomy' => 'servicetype', 'orderby' => 'id', 'order' => 'ASC',));
+                foreach ($terms as $term) {
                 ?>
-                    <div class="wpb_column column_container col-sm-6 col-md-4">
-                        <div class="column-inner">
-                            <div class="wpb_wrapper">
-                                <div class="service-box icon-box  ionic  hover-box">
-                                    <img src="<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>" alt="<?php echo get_the_title(); ?>">
-                                    <div class="content-box">
-                                        <h4><?php echo get_the_title(); ?></h4>
-                                        <p><?php echo wp_trim_words(get_the_content(), 20); ?></p>
-                                        <a class="link-box pagelink" href="<?php the_permalink(); ?>" target="_self">Read
-                                            more</a>
+                        <div class="wpb_column column_container col-sm-6 col-md-3">
+                            <div class="column-inner">
+                                <div class="wpb_wrapper">
+                                    <div class="service-box icon-box  ionic  hover-box">
+                                        <img src="<?php echo get_the_post_thumbnail_url(get_the_ID()); ?>" alt="<?php echo get_the_title(); ?>">
+                                        <div class="content-box">
+                                            <h4><?php echo $term->name ?></h4>
+                                            <a class="link-box pagelink" href="<?php echo get_term_link($term, 'servicetype'); ?>" target="_self">View
+                                                more</a>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="empty_space_30"><span class="empty_space_inner"></span></div>
+                                    <div class="empty_space_30"><span class="empty_space_inner"></span></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>
+                <?php }
+                 ?>
             </div>
         </div>
     </section>

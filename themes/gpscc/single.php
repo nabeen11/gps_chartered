@@ -49,7 +49,7 @@ the_post();
 											<time class="entry-date published"><?php echo get_the_date(); ?></time>
 										</span>
 										<span class="posted-in">
-											<a  rel="category tag"><?php echo get_the_author(); ?></a>
+											<a rel="category tag"><?php echo get_the_author(); ?></a>
 										</span>
 									</div>
 								</header>
@@ -65,23 +65,6 @@ the_post();
 				</div>
 
 				<aside id="sidebar" class="widget-area primary-sidebar col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<section id="search-2" class="widget widget_search">
-						<form role="search" method="get" id="search-form" class="search-form" action="#">
-							<input type="search" class="search-field" placeholder="Enter keyword..." value="" name="s">
-							<button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
-						</form>
-					</section>
-					<!-- <section id="categories-2" class="widget widget_categories">
-						<h4 class="widget-title">Categories</h4>
-						<ul>
-							<li><a href="#">Business</a></li>
-							<li class="cat-item cat-item-3"><a href="#">Consulting</a></li>
-							<li class="cat-item cat-item-4"><a href="#">Finacial</a></li>
-							<li class="cat-item cat-item-5"><a href="#">Franchising</a></li>
-							<li class="cat-item cat-item-6"><a href="#">Personal Injury</a></li>
-							<li class="cat-item cat-item-1"><a href="#">Uncategorized</a></li>
-						</ul>
-					</section> -->
 					<section id="recent_news-1" class="widget widget_recent_news">
 						<h4 class="widget-title">Latest News</h4>
 						<ul class="recent-news clearfix">
@@ -117,31 +100,6 @@ the_post();
 		</div>
 	</div>
 </div>
-
-<!-- <main id="primary" class="site-main"> -->
-
-<?php
-/* while ( have_posts() ) :
-			the_post();
-
-			get_template_part( 'template-parts/content', get_post_type() );
-
-			the_post_navigation(
-				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'gpscc' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'gpscc' ) . '</span> <span class="nav-title">%title</span>',
-				)
-			);
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop. */
-?>
-
-<!-- </main> -->
 
 <?php
 get_footer();

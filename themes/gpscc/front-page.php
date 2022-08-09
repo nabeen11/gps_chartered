@@ -200,7 +200,6 @@
                             <div class="wpb_text_column wpb_content_element text-right mobile-left">
                                 <div class="wpb_wrapper">
                                     <p><a class="pagelink gray" href="<?php echo get_permalink(get_page_by_path('blogs')); ?>">View all posts</a></p>
-
                                 </div>
                             </div>
                         </div>

@@ -109,6 +109,7 @@ function gpscc_setup()
 	add_image_size('partner', 152, 30, true);
 	add_image_size('blog', 370, 245, true);
 	add_image_size('blog-single', 770, 350, true);
+	add_image_size('team', 270, 270, true);
 
 	/*
 	 * Enable support for Post Formats.
