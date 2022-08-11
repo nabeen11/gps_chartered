@@ -44,7 +44,7 @@
 	<?php wp_body_open(); ?>
 	<div id="page" class="site">
 
-		<header id="site-header" class="site-header sticky-header mobile-header-blue header-style-1">
+		<header id="site-header" class="site-header header-transparent sticky-header mobile-header-blue header-style-1">
 			<!-- Main header start - Header Home-1, Default -->
 			<!-- Top bar start / class css: topbar-dark -->
 			<div id="header_topbar" class="header-topbar md-hidden sm-hidden clearfix">
@@ -70,59 +70,38 @@
 
 			<!-- Main header start -->
 			<div class="main-header md-hidden sm-hidden">
-				<div class="main-header-top">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="col-wrap-table">
-									<div id="site-logo" class="site-logo col-media-left col-media-middle">
-										<?php
-										the_custom_logo();
-										if (is_front_page() && is_home()) :
-										?>
-											<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
-										<?php
-										else :
-										?>
-											<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></p>
-										<?php
-										endif;
-										$gpscc_description = get_bloginfo('description', 'display');
-										if ($gpscc_description || is_customize_preview()) :
-										?>
-											<p class="site-description"><?php echo $gpscc_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-																		?></p>
-										<?php endif; ?>
-									</div>
-									<div class="col-media-body col-media-middle">
-										<!-- contact info -->
-										<ul class="info-list info_on_right_side fright">
-											<li>
-												<span>Address: <strong>Sankhamul, <br>New Baneshwor, Kathmandu, Nepal</strong></span>
-											</li>
-											<li>
-												<span>Call us: <strong class="font-size1">(+977) 985-1018797<br><span style="color: #0469b7;">Email us: <strong>gpschartered@gmail.com</strong></span></strong></span>
-											</li>
-										</ul>
-										<!-- contact info close -->
-									</div>
+				<!-- <div class="main-header-top"> -->
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-wrap-table mynav">
+								<div id="site-logo" class="site-logo col-media-left col-media-middle">
+									<?php
+									the_custom_logo();
+									if (is_front_page() && is_home()) :
+									?>
+										<h1 class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
+									<?php
+									else :
+									?>
+										<p class="site-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></p>
+									<?php
+									endif;
+									$gpscc_description = get_bloginfo('description', 'display');
+									if ($gpscc_description || is_customize_preview()) :
+									?>
+										<p class="site-description"><?php echo $gpscc_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+																	?></p>
+									<?php endif; ?>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="main-header-bottom">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="header-mainnav">
+								<div class="header-mainnav col-media-body col-media-middle">
 									<div id="site-navigation" class="main-navigation fleft">
 										<ul id="primary-menu" class="menu" style="padding-right: 20px;">
 											<li><a href="<?php echo get_site_url(); ?>">Home</a></li>
 											<li class="menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1789"><a href="#">Services</a>
 												<ul class="sub-menu cust-tab">
 													<div class="wrapper">
-														<div class="tabs">
+														<div class="cservice-box">
 															<?php
 															$terms = get_terms(array('taxonomy' => 'servicetype', 'orderby' => 'id', 'order' => 'ASC',));
 															foreach ($terms as $key => $term) {
@@ -142,23 +121,14 @@
 																);
 																$the_query = new WP_Query($args);
 															?>
-																<div class="tab">
-																	<input type="radio" name="css-tabs" id="tab-<?php echo $term->slug ?>" <?php
-																																			if ($key == 0) { ?> checked <?php } ?> class="tab-switch">
-																	<label for="tab-<?php echo $term->slug ?>" class="tab-label"><?php echo $term->name ?></label>
-																	<div class="tab-content">
-																		<div class="sub-menu col">
-																			<?php while ($the_query->have_posts()) {
-																				$the_query->the_post();  ?>
-																				<div class="sub-list">
-																					<label class="sub-text m-auto"><a href="<?php the_permalink(); ?>"><?php echo get_the_title(); ?></a></label>
-																					<div class="service_pricing">
-																						<a class="price-text"><a href="<?php the_permalink(); ?>">*<?php echo get_field('charge'); ?></a></label>
-																					</div>
-																				</div>
-																			<?php } ?>
+																<div class="serv">
+																	<h5><?php echo $term->name ?></h5>
+																	<?php while ($the_query->have_posts()) {
+																		$the_query->the_post();  ?>
+																		<div class="our-serv">
+																			<a href="<?php the_permalink(); ?>"><span><?php echo get_the_title(); ?></span></a>
 																		</div>
-																	</div>
+																	<?php } ?>
 																</div>
 															<?php
 															} ?>
@@ -186,7 +156,6 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
 			<!-- Main header close -->
 
@@ -245,7 +214,7 @@
 												$the_query->the_post();  ?>
 												<ul class="sub-menu" style="background: #f23225;">
 													<li>
-														<a href="<?php the_permalink(); ?>" aria-current="page"><?php echo get_the_title(); ?> <span style="float: right;">*<?php echo get_field('charge'); ?></span></a>
+														<a href="<?php the_permalink(); ?>" aria-current="page"><?php echo get_the_title(); ?></a>
 													</li>
 												</ul>
 											<?php
